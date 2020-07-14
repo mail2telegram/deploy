@@ -1,5 +1,9 @@
 <?php
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+
 return [
     'botName' => 'MailProxyBot',
     'telegramToken' => 'XXX',
@@ -16,4 +20,7 @@ return [
         'user' => 'guest',
         'pwd' => 'guest',
     ],
+    LoggerInterface::class => fn($c) => (new Logger('app'))->pushHandler(
+        new StreamHandler(STDERR, $c->get('logLevel'))
+    ),
 ];
