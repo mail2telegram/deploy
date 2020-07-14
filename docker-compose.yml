@@ -1,0 +1,40 @@
+version: '3'
+services:
+  redis:
+    container_name: m2t_redis
+    image: mail2telegram/redis
+    volumes:
+      - m2t_redis_data:/data
+      - ./conf/redis.conf:/etc/redis/redis.conf
+    sysctls:
+      net.core.somaxconn: '511'
+  rabbitmq:
+    container_name: m2t_rabbitmq
+    image: mail2telegram/rabbitmq
+  mail-proxy:
+    image: mail2telegram/mail-proxy
+    volumes:
+      - ./config.php:/app/config.php
+    depends_on:
+      - redis
+  bot-receiver:
+    image: mail2telegram/bot-receiver
+    volumes:
+      - ./config.php:/app/config.php
+    depends_on:
+      - redis
+      - rabbitmq
+  bot-handler:
+    image: mail2telegram/bot-handler
+    volumes:
+      - ./config.php:/app/config.php
+    depends_on:
+      - redis
+      - rabbitmq
+networks:
+  default:
+    external:
+      name: m2t
+volumes:
+  m2t_redis_data:
+    external: true
