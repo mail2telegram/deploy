@@ -1,0 +1,6 @@
+version: '3'
+services:
+  bot-receiver:
+    image: mail2telegram/bot-receiver
+    volumes:
+      - ./config.php:/app/config.php

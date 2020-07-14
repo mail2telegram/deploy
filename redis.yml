@@ -1,0 +1,14 @@
+version: '3'
+services:
+  redis:
+    image: mail2telegram/redis
+    volumes:
+      - m2t_redis_data:/data
+      - ./conf/redis.conf:/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+    sysctls:
+      net.core.somaxconn: '511'
+volumes:
+  m2t_redis_data:
+    external: true

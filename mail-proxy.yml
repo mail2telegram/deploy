@@ -1,0 +1,6 @@
+version: '3'
+services:
+  mail-proxy:
+    image: mail2telegram/mail-proxy
+    volumes:
+      - ./config.php:/app/config.php
