@@ -19,16 +19,16 @@ docker stack deploy -c services/mail-proxy.yml m2t
 Статус и логи
 ```bash
 docker service ls
-docker service logs m2t_rabbitmq
-docker service logs m2t_redis
-docker service logs m2t_bot-receiver
-docker service logs m2t_bot-handler
-docker service logs m2t_mail-proxy
+docker service logs m2t_rabbitmq -t 2>&1 | sort -k 1
+docker service logs m2t_redis -t 2>&1 | sort -k 1
+docker service logs m2t_bot-receiver -t 2>&1 | sort -k 1
+docker service logs m2t_bot-handler -t 2>&1 | sort -k 1
+docker service logs m2t_mail-proxy -t 2>&1 | sort -k 1
 ```
 
 Удаление ненужного
 ```bash
-docker service rm m2t_bot-receiver
+docker service rm m2t_bot-handler
 docker stack rm m2t
 docker swarm leave --force
 docker volume rm m2t_redis_data
