@@ -1,8 +1,0 @@
-version: '3'
-services:
-  bot-handler:
-    image: mail2telegram/bot-handler
-    volumes:
-      - ./config.php:/app/config.php
-    deploy:
-      replicas: 4

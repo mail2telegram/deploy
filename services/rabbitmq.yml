@@ -1,0 +1,13 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.8-alpine
+    hostname: m2t_rabbitmq
+    volumes:
+      - ../conf/rabbitmq:/etc/rabbitmq
+    ports:
+      - 5672:5672
+networks:
+  default:
+    external:
+      name: m2t_net

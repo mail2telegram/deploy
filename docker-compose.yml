@@ -3,6 +3,8 @@ services:
   redis:
     container_name: m2t_redis
     image: mail2telegram/redis
+    ports:
+      - 6379:6379
     volumes:
       - m2t_redis_data:/data
       - ./conf/redis.conf:/etc/redis/redis.conf
@@ -11,6 +13,9 @@ services:
   rabbitmq:
     container_name: m2t_rabbitmq
     image: mail2telegram/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
   mail-proxy:
     image: mail2telegram/mail-proxy
     volumes:
