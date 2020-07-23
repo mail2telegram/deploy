@@ -5,8 +5,6 @@ services:
     hostname: m2t_rabbitmq
     volumes:
       - ../conf/rabbitmq:/etc/rabbitmq
-    ports:
-      - 5672:5672
 networks:
   default:
     external:
